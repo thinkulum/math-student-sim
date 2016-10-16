@@ -15,13 +15,14 @@ def run_pyweb(package):
     """From the .w files, weave reStructuredText documentation files, and tangle 
     source code files. The .rst files are written to the w directory, and the 
     code files are written to the paths indicated in the .w files."""
-    # Temporarily set the command line arguments for pyweb. It's looking for the 
-    # input path.
-    with unittest.mock.patch('sys.argv', ['', 'w/%s.w' % package]):
-        # Configure the pyweb logger so it prints to the terminal.
-        with pyweb.Logger(pyweb.log_config):
-            # Process the .w files.
-            pyweb.main()
+    for w_path in glob('w/*.w'):
+        # Temporarily set the command line arguments for pyweb. It's looking for the 
+        # input path.
+        with unittest.mock.patch('sys.argv', ['', w_path]):
+            # Configure the pyweb logger so it prints to the terminal.
+            with pyweb.Logger(pyweb.log_config):
+                # Process the .w files.
+                pyweb.main()
 
 
 def rst2html():
