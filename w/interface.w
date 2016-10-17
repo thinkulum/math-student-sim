@@ -109,5 +109,4 @@ The command to quit will be ``q``. The command function will be self-contained r
 
 .. include:: <xhtml1-lat1.txt>
 .. include:: <xhtml1-special.txt>
-.. include:: <xhtml1-symbol.txt>
-.. include:: <isoamsa.txt>
+.. include:: xhtml1-symbol-isoamsa.txt
