@@ -12,6 +12,15 @@ class TestCLI(unittest.TestCase):
 
 
 
+class TestMetadata(unittest.TestCase):
+    """
+    Class for testing the app's metadata.
+    """
+
+    def test_version_number(self):
+        mathstudentsim.__version__ == '0.0.1'
+
+
 
 if __name__ == '__main__':
     unittest.main()

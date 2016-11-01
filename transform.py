@@ -15,7 +15,7 @@ def run_pyweb(package):
     """From the .w files, weave reStructuredText documentation files, and tangle 
     source code files. The .rst files are written to the w directory, and the 
     code files are written to the paths indicated in the .w files."""
-    for w_path in glob('w/*.w'):
+    for w_path in [os.path.join('w', 'mathstudentsim.w')]:
         # Temporarily set the command line arguments for pyweb. It's looking for the 
         # input path.
         with unittest.mock.patch('sys.argv', ['', w_path]):

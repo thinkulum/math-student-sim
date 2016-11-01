@@ -341,25 +341,215 @@ ul.auto-toc {
 <div class="document" id="math-student-simulator">
 <h1 class="title">Math Student Simulator</h1>
 
+<!-- This data file has been placed in the public domain. -->
+<!-- Derived from the Unicode character mappings available from
+<http://www.w3.org/2003/entities/xml/>.
+Processed by unicode2rstsubs.py, part of Docutils:
+<http://docutils.sourceforge.net>. -->
+<!-- This data file has been placed in the public domain. -->
+<!-- Derived from the Unicode character mappings available from
+<http://www.w3.org/2003/entities/xml/>.
+Processed by unicode2rstsubs.py, part of Docutils:
+<http://docutils.sourceforge.net>. -->
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
 <ul class="simple">
-<li><a class="reference external" href="interface.html">Interface</a></li>
+<li><a class="reference internal" href="#interface" id="id13">Interface</a><ul>
+<li><a class="reference internal" href="#command-line-interface" id="id14">Command line interface</a></li>
+<li><a class="reference internal" href="#testing" id="id15">Testing</a></li>
+<li><a class="reference internal" href="#quitting" id="id16">Quitting</a></li>
 </ul>
-<!-- This data file has been placed in the public domain. -->
-<!-- Derived from the Unicode character mappings available from
-<http://www.w3.org/2003/entities/xml/>.
-Processed by unicode2rstsubs.py, part of Docutils:
-<http://docutils.sourceforge.net>. -->
-<!-- This data file has been placed in the public domain. -->
-<!-- Derived from the Unicode character mappings available from
-<http://www.w3.org/2003/entities/xml/>.
-Processed by unicode2rstsubs.py, part of Docutils:
-<http://docutils.sourceforge.net>. -->
-<!-- This data file has been placed in the public domain. -->
-<!-- A union of Docutils' xhtml1-symbol.txt and isoamsa.txt.
-Derived from the Unicode character mappings available from
-<http://www.w3.org/2003/entities/xml/>.
-Processed by unicode2rstsubs.py, part of Docutils:
-<http://docutils.sourceforge.net>. -->
+</li>
+<li><a class="reference internal" href="#metadata" id="id17">Metadata</a><ul>
+<li><a class="reference internal" href="#version-number" id="id18">Version Number</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>This is the developer documentation for the app.</p>
+<div class="section" id="interface">
+<h1><a class="toc-backref" href="#id13">Interface</a></h1>
+<div class="section" id="command-line-interface">
+<h2><a class="toc-backref" href="#id14">Command line interface</a></h2>
+<p>Math Student Simulator will have an interactive command line interface using Python's cmd library, which does a lot of the work for us. All we need to do to start out with is import the module and subclass Cmd.</p>
+<p class="rubric" id="id1">mathstudentsim/cli.py (1) =</p>
+<pre class="code literal-block">
+import cmd
+
+class CLI(cmd.Cmd):
+    &quot;&quot;&quot;
+    Class for defining the command interface.
+    &quot;&quot;&quot;
+
+→q Command (<a class="reference internal" href="#id9">9</a>)
+</pre>
+<!--  -->
+<blockquote>
+<p class="small">◊ <em>mathstudentsim/cli.py (1)</em>.</p>
+</blockquote>
+<p>Then in the application launch script, we instantiate our subclass and call cmdloop(), which handles the interactive prompt.</p>
+<p>To get to the CLI class, we'll just load the whole package.</p>
+<p class="rubric" id="id2">app.py (2) =</p>
+<pre class="code literal-block">
+import mathstudentsim
+
+def main():
+    cli = mathstudentsim.cli.CLI()
+    cli.cmdloop()
+
+
+if __name__ == '__main__':
+    main()
+</pre>
+<!--  -->
+<blockquote>
+<p class="small">◊ <em>app.py (2)</em>.</p>
+</blockquote>
+<p>To make sure the cli module loads when we import the package, we'll list it in the package's __init__.py.</p>
+<p class="rubric" id="id3">mathstudentsim/__init__.py (3) =</p>
+<pre class="code literal-block">
+from . import cli
+
+→Version Number (<a class="reference internal" href="#id12">12</a>)
+</pre>
+<!--  -->
+<blockquote>
+<p class="small">◊ <em>mathstudentsim/__init__.py (3)</em>.</p>
+</blockquote>
+</div>
+<div class="section" id="testing">
+<h2><a class="toc-backref" href="#id15">Testing</a></h2>
+<p>I'm viewing the testing framework as another interface for the program. We'll use the standard unittest library for the tests and <a class="reference external" href="https://github.com/nose-devs/nose2">nose2</a> to run them.</p>
+<p>We have to import unittest and the app's package. But to give us the freedom to import the latter from wherever we want, we'll import it from a separate module that will specify its location.</p>
+<p class="rubric" id="id4">tests/test.py (4) =</p>
+<pre class="code literal-block">
+import unittest
+from context import mathstudentsim
+
+→TestCLI (<a class="reference internal" href="#id7">7</a>)
+
+→TestMetadata (<a class="reference internal" href="#id10">10</a>)
+
+→If tests Run as Script (<a class="reference internal" href="#id6">6</a>)
+</pre>
+<!--  -->
+<blockquote>
+<p class="small">◊ <em>tests/test.py (4)</em>.</p>
+</blockquote>
+<p>In that context module, we'll edit sys.path so the first place Python looks for the package is the local package's parent directory. That way we don't have to install the package into site-packages every time we make changes and want to test them.</p>
+<p class="rubric" id="id5">tests/context.py (5) =</p>
+<pre class="code literal-block">
+import os
+import sys
+sys.path.insert(0, os.path.abspath('..'))
+
+import mathstudentsim
+</pre>
+<!--  -->
+<blockquote>
+<p class="small">◊ <em>tests/context.py (5)</em>.</p>
+</blockquote>
+<p>If test.py is run as a script, we'll have it run the tests using unittest's main() function.</p>
+<p class="rubric" id="id6">If tests Run as Script (6) =</p>
+<pre class="code literal-block">
+if __name__ == '__main__':
+    unittest.main()
+</pre>
+<!--  -->
+<blockquote>
+<p class="small">◊ <em>If tests Run as Script (6)</em>. Used by: tests/test.py (<a class="reference internal" href="#id4">4</a>)</p>
+</blockquote>
+</div>
+<div class="section" id="quitting">
+<h2><a class="toc-backref" href="#id16">Quitting</a></h2>
+<p>Now we can start adding commands. The first will be a basic function: quitting the application.</p>
+<p>Let's start with a test to define the behavior we want. We'll put it in a class for testing the command line interface.</p>
+<p class="rubric" id="id7">TestCLI (7) =</p>
+<pre class="code literal-block">
+class TestCLI(unittest.TestCase):
+    &quot;&quot;&quot;
+    Class for testing the command interface.
+    &quot;&quot;&quot;
+
+→q Command Test (<a class="reference internal" href="#id8">8</a>)
+</pre>
+<!--  -->
+<blockquote>
+<p class="small">◊ <em>TestCLI (7)</em>. Used by: tests/test.py (<a class="reference internal" href="#id4">4</a>)</p>
+</blockquote>
+<p>The command to quit will be <tt class="docutils literal">q</tt>. The command function will be self-contained rather than calling a function from elsewhere, and all we'll test is whether it returns True, which is how cmdloop() knows to end. We'll use Cmd's onecmd() function to send the command to the interface.</p>
+<p class="rubric" id="id8">q Command Test (8) =</p>
+<pre class="code literal-block">
+    def test_quit(self):
+        cli = mathstudentsim.cli.CLI()
+        cli.onecmd('q')
+</pre>
+<!--  -->
+<blockquote>
+<p class="small">◊ <em>q Command Test (8)</em>. Used by: TestCLI (<a class="reference internal" href="#id7">7</a>)</p>
+</blockquote>
+<p class="rubric" id="id9">q Command (9) =</p>
+<pre class="code literal-block">
+    def do_q(self, arg):
+        &quot;&quot;&quot;Quit the application.&quot;&quot;&quot;
+        print('Bye!')
+        return True
+</pre>
+<!--  -->
+<blockquote>
+<p class="small">◊ <em>q Command (9)</em>. Used by: mathstudentsim/cli.py (<a class="reference internal" href="#id1">1</a>)</p>
+</blockquote>
+</div>
+</div>
+<div class="section" id="metadata">
+<h1><a class="toc-backref" href="#id17">Metadata</a></h1>
+<p>This section covers the app's metadata, information about the app itself.</p>
+<p>First we'll set up the metadata test class.</p>
+<p class="rubric" id="id10">TestMetadata (10) =</p>
+<pre class="code literal-block">
+class TestMetadata(unittest.TestCase):
+    &quot;&quot;&quot;
+    Class for testing the app's metadata.
+    &quot;&quot;&quot;
+
+→Version Number Test (<a class="reference internal" href="#id11">11</a>)
+</pre>
+<!--  -->
+<blockquote>
+<p class="small">◊ <em>TestMetadata (10)</em>. Used by: tests/test.py (<a class="reference internal" href="#id4">4</a>)</p>
+</blockquote>
+<div class="section" id="version-number">
+<h2><a class="toc-backref" href="#id18">Version Number</a></h2>
+<p>Let's make sure we've set the version number we expect.</p>
+<p class="rubric" id="id11">Version Number Test (11) =</p>
+<pre class="code literal-block">
+    def test_version_number(self):
+        mathstudentsim.__version__ == '0.0.1'
+</pre>
+<!--  -->
+<blockquote>
+<p class="small">◊ <em>Version Number Test (11)</em>. Used by: TestMetadata (<a class="reference internal" href="#id10">10</a>)</p>
+</blockquote>
+<p>Now we'll set the version number for the package.</p>
+<p class="rubric" id="id12">Version Number (12) =</p>
+<pre class="code literal-block">
+__version__ = '0.0.1'
+</pre>
+<!--  -->
+<blockquote>
+<p class="small">◊ <em>Version Number (12)</em>. Used by: mathstudentsim/__init__.py (<a class="reference internal" href="#id3">3</a>)</p>
+</blockquote>
+<p>For now that's all the metadata I'm defining in the .w files.</p>
+<hr class="docutils" />
+<blockquote class="small">
+Created by  at Sun Oct 23 01:00:34 2016.</blockquote>
+<p class="small">Source wmathstudentsim.w modified Sun Oct 23 00:58:14 2016.</p>
+<blockquote class="small">
+<p>pyweb.__version__ '2.3.2'.</p>
+<p>Working directory 'C:UsersthinkDropboxProjects05-STEM01-ComputersProgrammingProjectsmath-student-sim'.</p>
+</blockquote>
+</div>
+</div>
 </div>
 </body>
 </html>

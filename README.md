@@ -1,7 +1,120 @@
 # Math Student Simulator
 
-This project is my effort to learn certain aspects of math by implementing it as a program. It's an extension of my math relearning project at [http://www.thinkulum.net/wiki/Math_Relearning](http://www.thinkulum.net/wiki/Math_Relearning).
+## Table of contents
+
+* [Synopsis](#synopsis)
+* [Prerequisites](#prerequisites)
+* [Downloading](#downloading)
+* [Installing](#installation)
+* [Documentation](#documentation)
+* [Usage](#usage)
+* [Contributing](#contributing)
+* [Testing](#testing)
+* [Changelog](#changelog)
+* [License](#license)
+* [Authors](#authors)
+
+<a id="synopsis"></a>
+## Synopsis
+
+This project is my effort to learn certain aspects of math by implementing it as a program. It's an extension of my math relearning project at http://www.thinkulum.net/wiki/Math_Relearning.
+
+The app uses a command line interface. The developer documentation discusses the math in some detail using a literate programming format.
 
 Even though the project is called Math Student Simulator, it's not really a simulation of a math student. It doesn't, for example, reproduce the kinds of mistakes students make or the clarifying questions they might ask. It's a model of the kinds of concepts and procedures a person might correctly have in mind at each stage of their math education, at least those that can be represented by a fairly simple computer program. I won't be using advanced methods like computer vision or natural language processing.
 
-I'm coding the project in Python mostly because it's a language I already know and that's fairly easy to read. I'm using literate programming because it lets me treat the project as a writing exercise and ramble as much as I want.
+<a id="prerequisites"></a>
+## Prerequisites
+
+You'll need to have Python 3 installed. I'm using Python 3.5.2 to develop the app. The rest of the requirements should be handled by the installation script.
+
+<a id="downloading"></a>
+## Downloading
+
+If you have [Git](https://git-scm.com/) installed, you can download the project with this command:
+
+```
+git clone https://github.com/thinkulum/math-student-sim.git
+```
+
+Inside the command prompt's working directory Git will create a directory called `math-student-sim` that contains the project's contents.
+
+If you don't have Git, you can download the `tar.gz` or `zip` file for the latest release from https://github.com/thinkulum/math-student-sim/releases/latest.
+
+You can also download the code in its current state, which may or may not be the same as the latest release, from https://github.com/thinkulum/math-student-sim/archive/master.zip.
+
+<a id="installation"></a>
+## Installing
+
+You can run the app straight from the project's root directory without installing anything by running `app.py`. You'll need the dependencies, however, so before you run the app, run this command from that directory:
+
+```
+python setup.py -v -n
+```
+
+If that doesn't work and the app crashes because it can't find a module it needs, you should install the app as a library.
+
+To use the app as a library, you can install it by running this command from the project's root directory:
+
+```
+python setup.py install
+```
+
+For variations on this command to fit your circumstances, see https://docs.python.org/3/install/.
+
+<a id="documentation"></a>
+## Documentation
+
+The user documentation is in this `README` file under the [Usage](#usage) heading.
+
+The developer documentation is in `docs/mathstudentsim.html`. I'm writing this documentation in a [literate programming](https://en.wikipedia.org/wiki/Literate_programming) style. It's a convenient way for me to explain the math I'm coding. See the [Contributing](#contributing) section for more on the literate programming tool I'm using.
+
+<a id="usage"></a>
+## Usage
+
+To run the app, start a command prompt, change the current working directory to the project directory, and run this command:
+
+```
+python app.py
+```
+
+The app will give you the command prompt
+
+```
+(Cmd)
+```
+
+To see a list of the app's commands, type `help`.
+
+To see the details of a command, type `help <command>`. For example, for more information on the `help` command, type `help help`.
+
+<a id="contributing"></a>
+## Contributing
+
+Since the purpose of this project is for me to learn by programming, the contributions I accept will be limited. I'm willing to study other people's code for suggestions, which you can submit by making a [pull request](https://help.github.com/articles/about-pull-requests/) or creating an [issue](https://help.github.com/articles/creating-an-issue/). But if you want to make extensive additions or changes, probably the best idea is to start your own project by [forking](https://help.github.com/articles/fork-a-repo/) this one.
+
+This project uses the [pyWeb](https://sourceforge.net/projects/pywebtool/) literate programming tool. To make changes to the code or documentation, instead of directly modifying the Python files in the package directory or the HTML files in the `docs` directory, you'll need to modify the `.w` files in the `w` directory. See the [pyWeb documentation](http://pywebtool.sourceforge.net/) for details.
+
+Note that, other than `app.py`, the files in the project's root directory are not currently generated by the `.w` files, so you can edit them directly.
+
+After you've made the changes, run `transform.py`. That script will create or update the appropriate source code and documentation files.
+
+<a id="testing"></a>
+## Testing
+
+Run `run_tests.py` to automatically run all the tests. This is just the `node2` script renamed to avoid import conflicts.
+
+<a id="changelog"></a>
+## Changelog
+
+See https://github.com/thinkulum/math-student-sim/releases for the changelog.
+
+<a id="license"></a>
+## License
+
+This project uses the MIT license. See the file `LICENSE.md` for details.
+
+<a id="authors"></a>
+## Authors
+
+* Andy Culbertson (thinkulum@gmail.com) - original author

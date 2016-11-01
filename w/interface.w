@@ -1,9 +1,8 @@
-#########
 Interface
-#########
+*********
 
 Command line interface
-**********************
+======================
 
 Math Student Simulator will have an interactive command line interface using Python's cmd library, which does a lot of the work for us. All we need to do to start out with is import the module and subclass Cmd.
 
@@ -38,10 +37,12 @@ To make sure the cli module loads when we import the package, we'll list it in t
 
 @o mathstudentsim/__init__.py
 @{from . import cli
+
+@<Version Number@>
 @}
 
 Testing
-*******
+=======
 
 I'm viewing the testing framework as another interface for the program. We'll use the standard unittest library for the tests and `nose2 <https://github.com/nose-devs/nose2>`_ to run them.
 
@@ -53,6 +54,7 @@ from context import mathstudentsim
 
 @<TestCLI@>
 
+@<TestMetadata@>
 
 @<If tests Run as Script@>
 @}
@@ -75,7 +77,7 @@ If test.py is run as a script, we'll have it run the tests using unittest's main
 @}
 
 Quitting
-********
+========
 
 Now we can start adding commands. The first will be a basic function: quitting the application.
 
@@ -98,8 +100,6 @@ The command to quit will be ``q``. The command function will be self-contained r
         cli.onecmd('q')
 @}
 
-
-
 @d q Command
 @{    def do_q(self, arg):
         """Quit the application."""
@@ -107,6 +107,3 @@ The command to quit will be ``q``. The command function will be self-contained r
         return True
 @}
 
-.. include:: <xhtml1-lat1.txt>
-.. include:: <xhtml1-special.txt>
-.. include:: xhtml1-symbol-isoamsa.txt
